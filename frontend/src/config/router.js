@@ -11,7 +11,8 @@ Vue.use(VueRouter)
 const routes = [{
     name: 'HelloWord',
     path: '/',
-    component: HelloWorld
+    component: HelloWorld,
+    meta: { requiresAdmin: true }
 }, {
     name: 'auth',
     path: '/auth',
