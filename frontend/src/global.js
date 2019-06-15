@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-export const userKey = '__knowledge_user'
+export const userKey = '__knowledge_user' //chave para armasenar os dados do localStorege
 export const baseApiUrl = 'http://localhost:3000'
 
 export function showError(e) {

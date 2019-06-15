@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <Content />
+	<Loading v-if="validatingToken" />
+    <Content v-else/>
   </div>
 </template>
 
@@ -9,16 +10,14 @@ import axios from "axios"
 import { baseApiUrl, userKey } from "@/global"
 import { mapState } from "vuex"
 
-// import HelloWorld from './components/HelloWorld.vue'
-// import Auth from './components/auth/Auth.vue'
 import Content from './components/template/Content'
+import Loading from './components/template/Loading'
 
 export default {
   name: 'app',
   components: {
-    //HelloWorld,
-    //Auth,
-    Content
+	Content,
+	Loading
 
   },
   computed: mapState(['user']),
@@ -46,9 +45,9 @@ export default {
 			if (res.data) {
 				this.$store.commit('setUser', userData)
 				
-				if(this.$mq === 'xs' || this.$mq === 'sm') {
-					this.$store.commit('toggleMenu', false)
-				}
+				// if(this.$mq === 'xs' || this.$mq === 'sm') {
+				// 		this.$store.commit('toggleMenu', false)
+				// }
 			} else {
 				localStorage.removeItem(userKey)
 				this.$router.push({ name: 'auth' })

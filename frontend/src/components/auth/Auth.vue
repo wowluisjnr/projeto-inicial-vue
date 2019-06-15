@@ -36,11 +36,10 @@ export default {
     },
     methods: {
         signin() {
-            //console.log("teste", this.user)
-            axios.post(`http://localhost:3000/signin`, this.user)
+            axios.post(`${baseApiUrl}/signin`, this.user)
                 .then(res => {
                     this.$store.commit('setUser', res.data)
-                    localStorage.setItem(userKey, JSON.stringify(res.data))
+                    localStorage.setItem(userKey, JSON.stringify(res.data))//local que o browser armazena dados. mesmo apos fechar
                     this.$router.push({ path: '/' })
                 })
                 .catch(showError)
@@ -54,7 +53,12 @@ export default {
                 })
                 .catch(showError)
         }
-    }
+    },
+    // mounted(){
+    //     if(localStorage.getItem(userKey)){
+    //         this.$router.push({ path:'/'})
+    //     }
+    // }
 }
 </script>
 
