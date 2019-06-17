@@ -50,6 +50,23 @@ module.exports = app => {
 
         res.send(false)
     }
+    const validateAdmin = async (req, res) =>{
+        const userData = req.body || null
+        try{
+            if(userData) {                
+                const user = await app.db('users')
+                    .where({ email: userData.email })
+                    .first()
+                if(user.admin) {
+                    return res.send(true) 
+                }
+            }                       
 
-    return { signin, validateToken }
+        }
+        catch(e){}
+
+        res.send(false)
+    }
+
+    return { signin, validateToken, validateAdmin }
 }

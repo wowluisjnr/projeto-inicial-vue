@@ -5,7 +5,9 @@ const admin = require('./admin') //tem a função middware que verifica se é ad
 module.exports = app => {
     app.post('/signup', app.api.user.save)
     app.post('/signin', app.api.auth.signin)
-    app.post('/validateToken', app.api.auth.validateToken)
+    app.post('/validateToken', app.api.auth.validateToken)    
+    app.post('/validateAdmin', app.api.auth.validateAdmin)
+
 
 
     app.route('/users')

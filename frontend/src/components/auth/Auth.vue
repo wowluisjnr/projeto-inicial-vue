@@ -53,12 +53,7 @@ export default {
                 })
                 .catch(showError)
         }
-    },
-    // mounted(){
-    //     if(localStorage.getItem(userKey)){
-    //         this.$router.push({ path:'/'})
-    //     }
-    // }
+    }
 }
 </script>
 

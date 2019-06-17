@@ -1,18 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 
 import HelloWorld from '@/components/HelloWorld'
+import NotHelloWorld from '@/components/NotHelloWorld'
 import Auth from '@/components/auth/Auth'
 
-import { userKey } from '@/global'
+import { userKey, baseApiUrl } from '@/global'
 
 Vue.use(VueRouter)
 
 const routes = [{
-    name: 'HelloWord',
+    name: 'NotHelloWorld',
     path: '/',
-    component: HelloWorld
-   // meta: { requiresAdmin: true }
+    component: NotHelloWorld,
+}, {
+    name: 'HelloWord',
+    path: '/adm',
+    component: HelloWorld,
+    meta: { requiresAdmin: true }
 }, {
     name: 'auth',
     path: '/auth',
@@ -24,12 +30,14 @@ const router = new VueRouter({
     routes
 })
 
-router.beforeEach((to, from, next) => {
-    const json = localStorage.getItem(userKey)
+router.beforeEach(async (to, from, next) => {
+    const user = JSON.parse(localStorage.getItem(userKey))
+    const res = await axios.post(`${baseApiUrl}/validateAdmin`, user)
 
-    if(to.matched.some(record => record.meta.requiresAdmin)) {
-        const user = JSON.parse(json)
-        user && user.admin ? next() : next({ path: '/' })
+    if(to.matched.some(record => record.meta.requiresAdmin)) {        
+        user && res.data ? next() : next({ path: '/' })
+    } else if(user && to.path =='/auth'){
+        next({path: '/'})
     } else {
         next()
     }
