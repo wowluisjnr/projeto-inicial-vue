@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import axios from 'axios'
+import axios from 'axios' //
 
 import HelloWorld from '@/components/HelloWorld'
 import NotHelloWorld from '@/components/NotHelloWorld'
@@ -32,7 +32,9 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
     const user = JSON.parse(localStorage.getItem(userKey))
-    const res = await axios.post(`${baseApiUrl}/validateAdmin`, user)
+    const res = await axios.post(`${baseApiUrl}/validateAdmin`, user) // tenho que setar localStorage com user admin
+    user.admin = res.data
+    localStorage.setItem(userKey, JSON.stringify(user))
 
     if(to.matched.some(record => record.meta.requiresAdmin)) {        
         user && res.data ? next() : next({ path: '/' })
