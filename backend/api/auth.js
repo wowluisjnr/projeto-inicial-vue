@@ -14,9 +14,11 @@ module.exports = app => {
 
         if (!user) return res.status(400).send('Usuário não encontrado!')
 
-        const isMatch = bcrypt.compareSync(req.body.password, user.password)//compara os hash gerados das senhas
-        if (!isMatch) return res.status(401).send('Email/Senha inválidos!')
+        
 
+        const isMatch = bcrypt.compareSync(req.body.password, user.password)//compara os hash gerados das senhas
+        if (!isMatch) return res.status(400).send('Email/Senha inválidos!')
+        //401
         const now = Math.floor(Date.now() / 1000) // data atual de uma data x em segundos
 
         const payload = {  //conteudo do tokem
