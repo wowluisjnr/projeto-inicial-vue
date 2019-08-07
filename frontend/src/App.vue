@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+	<Header v-if="user" />
 	<Loading v-if="validatingToken" />
     <Content v-else/>
   </div>
@@ -12,10 +13,12 @@ import { mapState } from "vuex"
 
 import Content from './components/template/Content'
 import Loading from './components/template/Loading'
+import Header from './components/template/Header'
 
 export default {
   name: 'app',
   components: {
+	Header,
 	Content,
 	Loading
 
