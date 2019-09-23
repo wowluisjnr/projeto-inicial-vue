@@ -4,7 +4,7 @@
             <img src="@/assets/logo.png" width="200" alt="Logo" />
             <hr>
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
-            <b-form @keyup.enter="signin">
+            <b-form @keyup.enter="showSignup ? signup() : signin()">
                 <input v-if="showSignup" v-model="user.name" type="text" placeholder="Nome">
                 <input v-model="user.email" name="email" type="text" placeholder="E-mail">
                 <input v-model="user.password" name="password" type="password" placeholder="Senha">

@@ -17,7 +17,7 @@ module.exports = app => {
 
     app.route('/users/:id')
         .all(app.config.passport.authenticate())
-        //.get(app.api.user.getId) //Função não sera usada
+        .get(app.api.user.getId) //Função não sera usada
         .put(admin(app.api.user.save))
         .delete(admin(app.api.user.remove))
 

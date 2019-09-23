@@ -57,16 +57,16 @@ module.exports = app => {
             .catch(err => res.status(500).send(err))
     }
 
-    // const getId = (req, res)=>{
-    //     app.db('users')
-    //         .select('id', 'name', 'email', 'admin')
-    //         .where({id:req.params.id})
-    //         .whereNull('deletedAt')    
-    //         .first()
-    //         .then(user => res.json(user))
-    //         .catch(err => res.status(500).send(err))
+    const getId = (req, res)=>{
+        app.db('users')
+            //.select('id', 'name', 'email', 'admin')
+            .where({id:req.params.id})
+            //.whereNull('deletedAt')    
+            .first()
+            .then(user => res.json(user))
+            .catch(err => res.status(500).send(err))
 
-    // } // ESTA FUNÇÃO NÃO SERA USADA
+    } // ESTA FUNÇÃO NÃO SERA USADA
 
     const remove = async (req, res) => {
         try {
@@ -81,5 +81,5 @@ module.exports = app => {
         }
     }
     
-    return { save, get, remove }
+    return { save, get, remove, getId }
 }
