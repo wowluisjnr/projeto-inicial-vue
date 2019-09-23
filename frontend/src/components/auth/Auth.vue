@@ -4,16 +4,16 @@
             <img src="@/assets/logo.png" width="200" alt="Logo" />
             <hr>
             <div class="auth-title">{{ showSignup ? 'Cadastro' : 'Login' }}</div>
+            <b-form @keyup.enter="signin">
+                <input v-if="showSignup" v-model="user.name" type="text" placeholder="Nome">
+                <input v-model="user.email" name="email" type="text" placeholder="E-mail">
+                <input v-model="user.password" name="password" type="password" placeholder="Senha">
+                <input v-if="showSignup" v-model="user.confirmPassword"
+                    type="password" placeholder="Confirme a Senha">
 
-            <input v-if="showSignup" v-model="user.name" type="text" placeholder="Nome">
-            <input v-model="user.email" name="email" type="text" placeholder="E-mail">
-            <input v-model="user.password" name="password" type="password" placeholder="Senha">
-            <input v-if="showSignup" v-model="user.confirmPassword"
-                type="password" placeholder="Confirme a Senha">
-
-            <button v-if="showSignup" @click="signup">Registrar</button>
-            <button v-else @click="signin">Entrar</button>
-
+                <b-button v-if="showSignup" block variant="primary" @click="signup">Registrar</b-button>
+                <b-button v-else block variant="primary" @click="signin">Entrar</b-button>
+            </b-form>
             <a href @click.prevent="showSignup = !showSignup">
                 <span v-if="showSignup">Já tem cadastro? Acesse o Login!</span>
                 <span v-else>Não tem cadastro? Registre-se aqui!</span>
@@ -90,12 +90,12 @@ export default {
         outline: none;
     }
 
-    .auth-modal button {
+    /* .auth-modal button {
         align-self: flex-end;
         background-color: #2460ae;
         color: #FFF;
         padding: 5px 15px;
-    }
+    } */
 
     .auth-modal a {
         margin-top: 35px;
